@@ -1,0 +1,582 @@
+local player = game:GetService("Players").LocalPlayer
+local UserInputService = game:GetService("UserInputService")
+
+local notification = Instance.new("ScreenGui")
+notification.Name = "WallHopNotification"
+notification.ResetOnSpawn = false
+notification.Parent = player:WaitForChild("PlayerGui")
+
+local notifFrame = Instance.new("Frame")
+notifFrame.Size = UDim2.new(0, 300, 0, 80)
+notifFrame.Position = UDim2.new(0.5, -150, 0, 20)
+notifFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+notifFrame.BorderSizePixel = 0
+notifFrame.Parent = notification
+
+local notifStroke = Instance.new("UIStroke")
+notifStroke.Color = Color3.fromRGB(100, 200, 255)
+notifStroke.Thickness = 2
+notifStroke.Parent = notifFrame
+
+local notifCorner = Instance.new("UICorner")
+notifCorner.CornerRadius = UDim.new(0, 6)
+notifCorner.Parent = notifFrame
+
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Size = UDim2.new(1, 0, 0.4, 0)
+titleLabel.Position = UDim2.new(0, 0, 0.1, 0)
+titleLabel.BackgroundTransparency = 1
+titleLabel.Text = "WallHop V2"
+titleLabel.TextColor3 = Color3.fromRGB(100, 200, 255)
+titleLabel.Font = Enum.Font.GothamBold
+titleLabel.TextSize = 20
+titleLabel.Parent = notifFrame
+
+local descLabel = Instance.new("TextLabel")
+descLabel.Size = UDim2.new(1, 0, 0.4, 0)
+descLabel.Position = UDim2.new(0, 0, 0.5, 0)
+descLabel.BackgroundTransparency = 1
+descLabel.Text = "Special For xBac0nBl1tzXGaming only"
+descLabel.TextColor3 = Color3.fromRGB(220, 220, 240)
+descLabel.Font = Enum.Font.Gotham
+descLabel.TextSize = 14
+descLabel.Parent = notifFrame
+
+task.delay(5, function()
+    notification:Destroy()
+end)
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "WallHopGUI"
+gui.ResetOnSpawn = false
+gui.Parent = player:WaitForChild("PlayerGui")
+
+local jumpGui = nil
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 250, 0, 180)
+frame.Position = UDim2.new(0.5, -125, 0.1, 0)
+frame.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+frame.BorderSizePixel = 0
+frame.Active = true
+frame.Draggable = true
+frame.Parent = gui
+
+local uiCorner = Instance.new("UICorner")
+uiCorner.CornerRadius = UDim.new(0, 6)
+uiCorner.Parent = frame
+
+local uiStroke = Instance.new("UIStroke")
+uiStroke.Color = Color3.fromRGB(100, 200, 255)
+uiStroke.Thickness = 2
+uiStroke.Parent = frame
+
+local header = Instance.new("Frame")
+header.Size = UDim2.new(1, -20, 0, 40)
+header.Position = UDim2.new(0, 10, 0, 10)
+header.BackgroundTransparency = 1
+header.Parent = frame
+
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 20)
+title.Position = UDim2.new(0, 0, 0, 0)
+title.BackgroundTransparency = 1
+title.TextColor3 = Color3.fromRGB(220, 220, 240)
+title.Text = "WallHop Script V2"
+title.Font = Enum.Font.GothamMedium
+title.TextSize = 16
+title.TextXAlignment = Enum.TextXAlignment.Left
+title.Parent = header
+
+local credit = Instance.new("TextLabel")
+credit.Size = UDim2.new(1, 0, 0, 20)
+credit.Position = UDim2.new(0, 0, 0, 20)
+credit.BackgroundTransparency = 1
+credit.TextColor3 = Color3.fromRGB(170, 170, 200)
+credit.Text = "(Updated By Sans)"
+credit.Font = Enum.Font.Gotham
+credit.TextSize = 14
+credit.TextXAlignment = Enum.TextXAlignment.Left
+credit.Parent = header
+
+local toggle = Instance.new("TextButton")
+toggle.Size = UDim2.new(0, 100, 0, 35)
+toggle.Position = UDim2.new(0.25, -50, 0.8, 0)
+toggle.BackgroundColor3 = Color3.fromRGB(50, 50, 70)
+toggle.TextColor3 = Color3.fromRGB(240, 240, 250)
+toggle.Text = "OFF"
+toggle.Font = Enum.Font.GothamMedium
+toggle.TextSize = 14
+toggle.Parent = frame
+
+local destroyButton = Instance.new("TextButton")
+destroyButton.Size = UDim2.new(0, 100, 0, 35)
+destroyButton.Position = UDim2.new(0.75, -50, 0.8, 0)
+destroyButton.BackgroundColor3 = Color3.fromRGB(70, 50, 50)
+destroyButton.TextColor3 = Color3.fromRGB(240, 240, 250)
+destroyButton.Text = "Destroy GUI"
+destroyButton.Font = Enum.Font.GothamMedium
+destroyButton.TextSize = 14
+destroyButton.Parent = frame
+
+local additionButton = Instance.new("TextButton")
+additionButton.Size = UDim2.new(0, 100, 0, 35)
+additionButton.Position = UDim2.new(0.25, -50, 0.5, 0)
+additionButton.BackgroundColor3 = Color3.fromRGB(50, 70, 50)
+additionButton.TextColor3 = Color3.fromRGB(240, 240, 250)
+additionButton.Text = "Addition"
+additionButton.Font = Enum.Font.GothamMedium
+additionButton.TextSize = 14
+additionButton.Parent = frame
+
+local rtxButton = Instance.new("TextButton")
+rtxButton.Size = UDim2.new(0, 100, 0, 35)
+rtxButton.Position = UDim2.new(0.75, -50, 0.5, 0)
+rtxButton.BackgroundColor3 = Color3.fromRGB(50, 50, 70)
+rtxButton.TextColor3 = Color3.fromRGB(240, 240, 250)
+rtxButton.Text = "RTX OFF"
+rtxButton.Font = Enum.Font.GothamMedium
+rtxButton.TextSize = 14
+rtxButton.Parent = frame
+
+local minimizeButton = Instance.new("TextButton")
+minimizeButton.Size = UDim2.new(0, 30, 0, 20)
+minimizeButton.Position = UDim2.new(1, -35, 0, 5)
+minimizeButton.BackgroundColor3 = Color3.fromRGB(60, 60, 80)
+minimizeButton.TextColor3 = Color3.fromRGB(240, 240, 250)
+minimizeButton.Text = "-"
+minimizeButton.Font = Enum.Font.GothamBold
+minimizeButton.TextSize = 14
+minimizeButton.Parent = frame
+
+local secretButton = Instance.new("TextButton")
+secretButton.Size = UDim2.new(0, 30, 0, 20)
+secretButton.Position = UDim2.new(1, -35, 0, 30)
+secretButton.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+secretButton.TextColor3 = Color3.fromRGB(220, 220, 240)
+secretButton.Text = "???"
+secretButton.Font = Enum.Font.Gotham
+secretButton.TextSize = 12
+secretButton.Parent = frame
+
+local minimizedFrame = Instance.new("Frame")
+minimizedFrame.Size = UDim2.new(0, 40, 0, 20)
+minimizedFrame.Position = UDim2.new(0.5, -20, 0, 10)
+minimizedFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+minimizedFrame.BorderSizePixel = 0
+minimizedFrame.Active = true
+minimizedFrame.Draggable = false
+minimizedFrame.Visible = false
+minimizedFrame.Parent = gui
+
+local minimizedStroke = Instance.new("UIStroke")
+minimizedStroke.Color = Color3.fromRGB(100, 200, 255)
+minimizedStroke.Thickness = 2
+minimizedStroke.Parent = minimizedFrame
+
+local minimizedText = Instance.new("TextButton")
+minimizedText.Size = UDim2.new(1, 0, 1, 0)
+minimizedText.BackgroundTransparency = 1
+minimizedText.Text = "-"
+minimizedText.TextColor3 = Color3.fromRGB(220, 220, 240)
+minimizedText.Font = Enum.Font.GothamBold
+minimizedText.TextSize = 14
+minimizedText.Parent = minimizedFrame
+
+local buttonCorner = Instance.new("UICorner")
+buttonCorner.CornerRadius = UDim.new(0, 5)
+buttonCorner.Parent = toggle
+buttonCorner:Clone().Parent = destroyButton
+buttonCorner:Clone().Parent = additionButton
+buttonCorner:Clone().Parent = rtxButton
+buttonCorner:Clone().Parent = minimizeButton
+buttonCorner:Clone().Parent = secretButton
+
+local buttonStroke = Instance.new("UIStroke")
+buttonStroke.Color = Color3.fromRGB(100, 100, 130)
+buttonStroke.Thickness = 1
+buttonStroke.Parent = toggle
+buttonStroke:Clone().Parent = destroyButton
+buttonStroke:Clone().Parent = additionButton
+buttonStroke:Clone().Parent = rtxButton
+buttonStroke:Clone().Parent = minimizeButton
+buttonStroke:Clone().Parent = secretButton
+
+local wallhopEnabled = false
+local humanoid = nil
+local lastJumpTime = 0
+local jumpCooldown = 0.15
+local WALL_CHECK_DISTANCE = 2
+
+local rtxEffects = {}
+local motionBlur = nil
+local runServiceConnection = nil
+local workspaceConnection = nil
+local rtxEnabled = false
+
+local function isNearWall()
+    if not player.Character then return false end
+    local rootPart = player.Character:FindFirstChild("HumanoidRootPart")
+    if not rootPart then return false end
+    
+    local params = RaycastParams.new()
+    params.FilterDescendantsInstances = {player.Character}
+    params.FilterType = Enum.RaycastFilterType.Blacklist
+    
+    for _, p in ipairs(game:GetService("Players"):GetPlayers()) do
+        if p ~= player and p.Character then
+            table.insert(params.FilterDescendantsInstances, p.Character)
+        end
+    end
+    
+    local directions = {
+        Vector3.new(1, 0, 0),
+        Vector3.new(-1, 0, 0),
+        Vector3.new(0, 0, 1),
+        Vector3.new(0, 0, -1)
+    }
+    
+    for _, dir in ipairs(directions) do
+        local ray = workspace:Raycast(rootPart.Position, dir * WALL_CHECK_DISTANCE, params)
+        if ray and ray.Instance then
+            local model = ray.Instance:FindFirstAncestorOfClass("Model")
+            if not (model and model:FindFirstChildOfClass("Humanoid")) then
+                return true, dir
+            end
+        end
+    end
+    
+    return false
+end
+
+local function doCharacterRotation()
+    if not player.Character then return end
+    local rootPart = player.Character:FindFirstChild("HumanoidRootPart")
+    if not rootPart then return end
+    
+    local nearWall, wallDir = isNearWall()
+    if not nearWall then return end
+    
+    local angle = math.deg(math.atan2(wallDir.Z, wallDir.X)) + 180
+    local rotationCFrame = CFrame.Angles(0, math.rad(130), 0)
+    local originalCFrame = rootPart.CFrame
+    
+    rootPart.CFrame = originalCFrame * rotationCFrame
+    task.wait(0.05)
+    rootPart.CFrame = originalCFrame
+end
+
+local function executeWallHop()
+    if not wallhopEnabled or not humanoid then return end
+    
+    if tick() - lastJumpTime < jumpCooldown then return end
+    lastJumpTime = tick()
+    
+    local nearWall = isNearWall()
+    if nearWall then
+        doCharacterRotation()
+        humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+    end
+end
+
+local function createRTXEffects()
+    if #rtxEffects > 0 then
+        for _, effect in pairs(rtxEffects) do
+            if effect and effect.Parent then
+                effect:Destroy()
+            end
+        end
+        rtxEffects = {}
+    end
+    
+    if motionBlur then
+        motionBlur:Destroy()
+        motionBlur = nil
+    end
+    
+    if runServiceConnection then
+        runServiceConnection:Disconnect()
+        runServiceConnection = nil
+    end
+    
+    if workspaceConnection then
+        workspaceConnection:Disconnect()
+        workspaceConnection = nil
+    end
+    
+    local a = game.Lighting
+    a.Ambient = Color3.fromRGB(33, 33, 33)
+    a.Brightness = 0.4
+    a.ColorShift_Bottom = Color3.fromRGB(0, 0, 0)
+    a.ColorShift_Top = Color3.fromRGB(255, 247, 237)
+    a.EnvironmentDiffuseScale = 0.105
+    a.EnvironmentSpecularScale = 0.522
+    a.GlobalShadows = true
+    a.OutdoorAmbient = Color3.fromRGB(51, 54, 67)
+    a.ShadowSoftness = 0
+    a.GeographicLatitude = -0
+    a.ExposureCompensation = 0
+    
+    local b = Instance.new("BloomEffect", a)
+    b.Enabled = true
+    b.Intensity = 0.04
+    b.Size = 1900
+    b.Threshold = 0.915
+    table.insert(rtxEffects, b)
+    
+    local c = Instance.new("ColorCorrectionEffect", a)
+    c.Brightness = 0.176
+    c.Contrast = 0.39
+    c.Enabled = true
+    c.Saturation = 0.2
+    c.TintColor = Color3.fromRGB(255, 220, 148)
+    table.insert(rtxEffects, c)
+    
+    local d = Instance.new("DepthOfFieldEffect", a)
+    d.Enabled = true
+    d.FarIntensity = 0.077
+    d.FocusDistance = 21.54
+    d.InFocusRadius = 20.77
+    d.NearIntensity = 0.277
+    table.insert(rtxEffects, d)
+    
+    local e = Instance.new("ColorCorrectionEffect", a)
+    e.Brightness = 0
+    e.Contrast = -0.07
+    e.Saturation = 0
+    e.Enabled = true
+    e.TintColor = Color3.fromRGB(255, 247, 239)
+    table.insert(rtxEffects, e)
+    
+    local e2 = Instance.new("ColorCorrectionEffect", a)
+    e2.Brightness = 0.2
+    e2.Contrast = 0.45
+    e2.Saturation = -0.1
+    e2.Enabled = true
+    e2.TintColor = Color3.fromRGB(255, 255, 255)
+    table.insert(rtxEffects, e2)
+    
+    local s = Instance.new("SunRaysEffect", a)
+    s.Enabled = true
+    s.Intensity = 0.01
+    s.Spread = 0.146
+    table.insert(rtxEffects, s)
+    
+    local camera = workspace.CurrentCamera
+    local blurAmount = 10
+    local blurAmplifier = 5
+    local lastVector = camera.CFrame.LookVector
+    
+    motionBlur = Instance.new("BlurEffect", camera)
+    
+    workspaceConnection = workspace.Changed:Connect(function(property)
+        if property == "CurrentCamera" then
+            camera = workspace.CurrentCamera
+            if motionBlur and motionBlur.Parent then
+                motionBlur.Parent = camera
+            else
+                motionBlur = Instance.new("BlurEffect", camera)
+            end
+        end
+    end)
+    
+    runServiceConnection = game:GetService("RunService").Heartbeat:Connect(function()
+        if not motionBlur or motionBlur.Parent == nil then
+            motionBlur = Instance.new("BlurEffect", camera)
+        end
+        
+        local magnitude = (camera.CFrame.LookVector - lastVector).magnitude
+        motionBlur.Size = math.abs(magnitude)*blurAmount*blurAmplifier/2
+        lastVector = camera.CFrame.LookVector
+    end)
+end
+
+local function removeRTXEffects()
+    for _, effect in pairs(rtxEffects) do
+        if effect and effect.Parent then
+            effect:Destroy()
+        end
+    end
+    rtxEffects = {}
+    
+    if motionBlur then
+        motionBlur:Destroy()
+        motionBlur = nil
+    end
+    
+    if runServiceConnection then
+        runServiceConnection:Disconnect()
+        runServiceConnection = nil
+    end
+    
+    if workspaceConnection then
+        workspaceConnection:Disconnect()
+        workspaceConnection = nil
+    end
+end
+
+local function createJumpGui()
+    if jumpGui then jumpGui:Destroy() end
+    
+    jumpGui = Instance.new("ScreenGui")
+    jumpGui.Name = "JumpGUI"
+    jumpGui.ResetOnSpawn = false
+    jumpGui.Parent = player:WaitForChild("PlayerGui")
+    
+    local jumpFrame = Instance.new("Frame")
+    jumpFrame.Size = UDim2.new(0, 100, 0, 100)
+    jumpFrame.Position = UDim2.new(0.5, -50, 0.8, -50)
+    jumpFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+    jumpFrame.BorderSizePixel = 0
+    jumpFrame.Active = true
+    jumpFrame.Draggable = true
+    jumpFrame.Parent = jumpGui
+    
+    local jumpUiCorner = Instance.new("UICorner")
+    jumpUiCorner.CornerRadius = UDim.new(0, 6)
+    jumpUiCorner.Parent = jumpFrame
+    
+    local jumpUiStroke = Instance.new("UIStroke")
+    jumpUiStroke.Color = Color3.fromRGB(100, 200, 255)
+    jumpUiStroke.Thickness = 2
+    jumpUiStroke.Parent = jumpFrame
+    
+    local jumpBtn = Instance.new("TextButton")
+    jumpBtn.Size = UDim2.new(0.8, 0, 0.8, 0)
+    jumpBtn.Position = UDim2.new(0.1, 0, 0.1, 0)
+    jumpBtn.BackgroundColor3 = Color3.fromRGB(70, 180, 100)
+    jumpBtn.TextColor3 = Color3.fromRGB(240, 240, 250)
+    jumpBtn.Text = "JUMP"
+    jumpBtn.Font = Enum.Font.GothamBold
+    jumpBtn.TextSize = 18
+    jumpBtn.Parent = jumpFrame
+    
+    local jumpBtnCorner = Instance.new("UICorner")
+    jumpBtnCorner.CornerRadius = UDim.new(0, 5)
+    jumpBtnCorner.Parent = jumpBtn
+    
+    local jumpBtnStroke = Instance.new("UIStroke")
+    jumpBtnStroke.Color = Color3.fromRGB(100, 100, 130)
+    jumpBtnStroke.Thickness = 1
+    jumpBtnStroke.Parent = jumpBtn
+    
+    jumpBtn.MouseButton1Click:Connect(function()
+        if wallhopEnabled then
+            executeWallHop()
+        end
+    end)
+end
+
+local function showObunga()
+    local obungaGui = Instance.new("ScreenGui")
+    obungaGui.Name = "ObungaGUI"
+    obungaGui.ResetOnSpawn = false
+    obungaGui.Parent = player:WaitForChild("PlayerGui")
+    
+    local obungaFrame = Instance.new("Frame")
+    obungaFrame.Size = UDim2.new(0, 200, 0, 200)
+    obungaFrame.Position = UDim2.new(0.5, -100, 0.5, -100)
+    obungaFrame.BackgroundTransparency = 1
+    obungaFrame.Parent = obungaGui
+    
+    local obungaImage = Instance.new("ImageLabel")
+    obungaImage.Size = UDim2.new(1, 0, 1, 0)
+    obungaImage.Image = "rbxassetid://106165434504345"
+    obungaImage.BackgroundTransparency = 1
+    obungaImage.Parent = obungaFrame
+    
+    task.delay(3, function()
+        obungaGui:Destroy()
+    end)
+end
+
+local function deletePlayers()
+    for _, otherPlayer in ipairs(game:GetService("Players"):GetPlayers()) do
+        if otherPlayer ~= player and otherPlayer.Character then
+            otherPlayer.Character:Destroy()
+        end
+    end
+end
+
+local function toggleMinimize()
+    if frame.Visible then
+        frame.Visible = false
+        minimizedFrame.Visible = true
+    else
+        frame.Visible = true
+        minimizedFrame.Visible = false
+    end
+end
+
+minimizeButton.MouseButton1Click:Connect(toggleMinimize)
+minimizedText.MouseButton1Click:Connect(toggleMinimize)
+
+secretButton.MouseButton1Click:Connect(function()
+    deletePlayers()
+    showObunga()
+end)
+
+destroyButton.MouseButton1Click:Connect(function()
+    if wallhopEnabled then
+        wallhopEnabled = false
+        toggle.Text = "OFF"
+        toggle.BackgroundColor3 = Color3.fromRGB(50, 50, 70)
+    end
+    if jumpGui then jumpGui:Destroy() end
+    gui:Destroy()
+end)
+
+toggle.MouseButton1Click:Connect(function()
+    wallhopEnabled = not wallhopEnabled
+    if wallhopEnabled then
+        toggle.Text = "ON"
+        toggle.BackgroundColor3 = Color3.fromRGB(70, 180, 100)
+    else
+        toggle.Text = "OFF"
+        toggle.BackgroundColor3 = Color3.fromRGB(50, 50, 70)
+    end
+end)
+
+rtxButton.MouseButton1Click:Connect(function()
+    rtxEnabled = not rtxEnabled
+    if rtxEnabled then
+        rtxButton.Text = "RTX ON"
+        rtxButton.BackgroundColor3 = Color3.fromRGB(70, 180, 100)
+        createRTXEffects()
+    else
+        rtxButton.Text = "RTX OFF"
+        rtxButton.BackgroundColor3 = Color3.fromRGB(50, 50, 70)
+        removeRTXEffects()
+    end
+end)
+
+additionButton.MouseButton1Click:Connect(function()
+    if jumpGui and jumpGui.Parent then
+        jumpGui:Destroy()
+        jumpGui = nil
+    else
+        createJumpGui()
+    end
+end)
+
+local function setupCharacter(character)
+    humanoid = character:WaitForChild("Humanoid")
+    
+    humanoid.StateChanged:Connect(function(_, newState)
+        if newState == Enum.HumanoidStateType.Jumping then
+            executeWallHop()
+        end
+    end)
+end
+
+if player.Character then
+    setupCharacter(player.Character)
+end
+
+player.CharacterAdded:Connect(setupCharacter)
+
+UserInputService.JumpRequest:Connect(function()
+    if wallhopEnabled then
+        executeWallHop()
+    end
+end)
