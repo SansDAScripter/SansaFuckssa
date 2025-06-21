@@ -1,51 +1,6 @@
 local player = game:GetService("Players").LocalPlayer
 local UserInputService = game:GetService("UserInputService")
 
-local notification = Instance.new("ScreenGui")
-notification.Name = "WallHopNotification"
-notification.ResetOnSpawn = false
-notification.Parent = player:WaitForChild("PlayerGui")
-
-local notifFrame = Instance.new("Frame")
-notifFrame.Size = UDim2.new(0, 300, 0, 80)
-notifFrame.Position = UDim2.new(0.5, -150, 0, 20)
-notifFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
-notifFrame.BorderSizePixel = 0
-notifFrame.Parent = notification
-
-local notifStroke = Instance.new("UIStroke")
-notifStroke.Color = Color3.fromRGB(100, 200, 255)
-notifStroke.Thickness = 2
-notifStroke.Parent = notifFrame
-
-local notifCorner = Instance.new("UICorner")
-notifCorner.CornerRadius = UDim.new(0, 6)
-notifCorner.Parent = notifFrame
-
-local titleLabel = Instance.new("TextLabel")
-titleLabel.Size = UDim2.new(1, 0, 0.4, 0)
-titleLabel.Position = UDim2.new(0, 0, 0.1, 0)
-titleLabel.BackgroundTransparency = 1
-titleLabel.Text = "WallHop V2"
-titleLabel.TextColor3 = Color3.fromRGB(100, 200, 255)
-titleLabel.Font = Enum.Font.GothamBold
-titleLabel.TextSize = 20
-titleLabel.Parent = notifFrame
-
-local descLabel = Instance.new("TextLabel")
-descLabel.Size = UDim2.new(1, 0, 0.4, 0)
-descLabel.Position = UDim2.new(0, 0, 0.5, 0)
-descLabel.BackgroundTransparency = 1
-descLabel.Text = "Special For xBac0nBl1tzXGaming only"
-descLabel.TextColor3 = Color3.fromRGB(220, 220, 240)
-descLabel.Font = Enum.Font.Gotham
-descLabel.TextSize = 14
-descLabel.Parent = notifFrame
-
-task.delay(5, function()
-    notification:Destroy()
-end)
-
 local gui = Instance.new("ScreenGui")
 gui.Name = "WallHopGUI"
 gui.ResetOnSpawn = false
